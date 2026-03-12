@@ -5,13 +5,16 @@ import Shimmer from "./Shimmer";
 const Body = () => {
   const [listOfRestaurants, setlistOfReastaurants] = useState([]);
 
+  const [searchText, setSearchText] = useState("");
+  const [filterdRestaurant, setFilterdRestaurant] = useState([]);
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.4733386&lng=80.2976316&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.4733386&lng=80.2976316&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
     );
 
     const json = await data.json();
@@ -21,19 +24,50 @@ const Body = () => {
       (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants,
     );
 
+    // Optional Chaining-
     setlistOfReastaurants(
       restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants ||
         [],
     );
+    setFilterdRestaurant(
+      restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants ||
+        [],
+    );
   };
+  /*  Conditional Rendering- return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) :  we use ternary operator here */
 
-  if (listOfRestaurants.length === 0) {
-    return <Shimmer />;
-  }
-
-  return (
+  return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
+        <div className="seacrh">
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              // filter the res card and update the ui
+              // searchText
+              console.log(searchText);
+              const filterdRestaurant = listOfRestaurants.filter((res) =>
+                res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLocaleLowerCase()),
+              );
+              setFilterdRestaurant(filterdRestaurant);
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={() => {
@@ -49,7 +83,7 @@ const Body = () => {
       </div>
 
       <div className="res-container">
-        {listOfRestaurants.map((restaurant) => (
+        {filterdRestaurant.map((restaurant) => (
           <RestaurantCard
             key={restaurant?.info?.id || restaurant?.id}
             resData={restaurant}
