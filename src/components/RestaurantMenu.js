@@ -1,24 +1,27 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; //
 import Shimmer from "./Shimmer";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
-  const { resId } = useParams(); //  URL se id aayegi automatically
+  // const [resInfo, setResInfo] = useState(null);
+  const { resId } = useParams(); //  URL se id
+  // aayegi automatically
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  const resInfo = useRestaurantMenu(resId);
 
-  const fetchMenu = async () => {
-    const data = await fetch(
-      //  resId dynamic hai - har restaurant ke liye kaam karega
-      `https://corsproxy.io/?https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER`,
-    );
-    const json = await data.json();
-    console.log(json);
-    setResInfo(json.data);
-  };
+  // useEffect(() => {
+  //   fetchMenu();
+  // }, []);
+
+  // const fetchMenu = async () => {
+  //   const data = await fetch(
+  //     //  resId dynamic hai - har restaurant ke liye kaam karega
+  //     `https://corsproxy.io/?https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER`,
+  //   );
+  //   const json = await data.json();
+  //   console.log(json);
+  //   setResInfo(json.data);
+  // };
 
   if (resInfo === null) return <Shimmer />;
 
