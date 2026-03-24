@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // local state variables - Super Powerful variables
@@ -41,6 +42,14 @@ const Body = () => {
       console.error("Fetch failed:", error);
     }
   };
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false)
+    return (
+      <h1>
+        Looks like You're offilne!! Please check your Internet connection.
+      </h1>
+    );
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
