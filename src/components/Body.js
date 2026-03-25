@@ -50,13 +50,6 @@ const Body = () => {
         Looks like You're offilne!! Please check your Internet connection.
       </h1>
     );
-  const onlineStatus = useOnlineStatus();
-  if (onlineStatus === false)
-    return (
-      <h1>
-        Looks like You're offilne!! Please check your Internet connection.
-      </h1>
-    );
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
