@@ -64,7 +64,7 @@ const Body = () => {
             onChange={(e) => setSearchText(e.target.value)}
           />
           <button
-            className="px-4 py-1 bg-blue-100 m-4 rounded-lg"
+            className="px-4 py-1 bg-pink-50 m-4 rounded-lg hover:bg-pink-100"
             onClick={() => {
               const filtered = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase()),
@@ -77,7 +77,7 @@ const Body = () => {
         </div>
         <div className="m-4 p-4 flex items-center">
           <button
-            className="px-4 py-1 bg-blue-100 rounded-lg"
+            className="px-4 py-1 bg-blue-50 m-4 rounded-lg hover:bg-blue-100"
             onClick={() => {
               const filtered = listOfRestaurants.filter(
                 (res) => Number(res?.info?.avgRating) > 4,
@@ -90,7 +90,7 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredRestaurant.map((restaurant) => (
           <Link
             key={restaurant?.info?.id}
