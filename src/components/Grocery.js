@@ -4,7 +4,3 @@ const Grocery = () => {
   );
 };
 export default Grocery;
-
-const GroceryUpdate = () => {
-  return <h1>Update Grocery Items</h1>;
-};
