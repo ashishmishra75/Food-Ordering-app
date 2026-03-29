@@ -24,19 +24,21 @@ const Header = () => {
       <div className="flex items-center">
         <ul className="flex p-4 m-4 ">
           <li className="px-4">online Status: {onlineStatus ? "✅" : "🔴"}</li>
-          <li className="px-4">
+          <li className="px-4 hover:underline">
             <Link to="/">Home</Link>
           </li>
-          <li className="px-4">
+          <li className="px-4 hover:underline">
             <Link to="/about">About Us</Link>
           </li>
-          <li className="px-4">
+          <li className="px-4 hover:underline">
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li className="px-4">
+          <li className="px-4 hover:underline">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li className="px-4">Cart</li>
+          <li className="px-4 hover:underline">
+            <Link to="/cart">Cart</Link>
+          </li>
           <button
             className="login-btn"
             onClick={() => {
