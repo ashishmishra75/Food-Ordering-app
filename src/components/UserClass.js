@@ -35,7 +35,6 @@ class UserClass extends React.Component {
         <h2>Name: {name}</h2>
         <h3>Location: {location}</h3>
         <h4>Contact: 1234567890</h4>
-        <h4>Email: ashishmishra0366@gmail.com</h4>
       </div>
     );
   }
