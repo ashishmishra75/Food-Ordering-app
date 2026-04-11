@@ -18,7 +18,6 @@ const RestaurantCategory = ({ data, showItems, setShowIndex, index }) => {
         <span>{showItems ? "🔼" : "🔽"}</span>
       </div>
 
-      {/* Accordion Body - ItemList */}
       {showItems && <ItemList items={data.itemCards || []} />}
     </div>
   );
